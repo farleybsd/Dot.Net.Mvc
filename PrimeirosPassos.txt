@@ -1,0 +1,5 @@
+Criar a Pasta Web Dentro do projeto
+dotnet new web
+
+rodar aplicacao
+dotnet run 
