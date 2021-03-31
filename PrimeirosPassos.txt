@@ -17,3 +17,6 @@ realizando migrate
 Add-Migration Inicial
 aplicando a migracao no banco de dados
 Update-Database -verbose
+
+restore banco
+Update-Database -verbose
