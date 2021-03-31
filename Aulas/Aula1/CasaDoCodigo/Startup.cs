@@ -54,7 +54,7 @@ namespace CasaDoCodigo
             });
 
             // Execultar o migrate quando rodar o projeto
-            serviceProvider.GetService<ApplicationContext>().Database.EnsureCreated();
+            serviceProvider.GetService<ApplicationContext>().Database.Migrate();
         }
     }
 }
