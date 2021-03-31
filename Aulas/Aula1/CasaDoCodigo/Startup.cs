@@ -57,7 +57,7 @@ namespace CasaDoCodigo
             });
 
             // Execultar o migrate quando rodar o projeto
-            serviceProvider.GetService<DataService>().InicializaDb();
+            serviceProvider.GetService<IDataService>().InicializaDb();
         }
     }
 }
