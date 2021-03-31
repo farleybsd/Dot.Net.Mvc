@@ -3,3 +3,6 @@ dotnet new web
 
 rodar aplicacao
 dotnet run 
+
+Criando um projeto MVC
+dotnet new mvc
