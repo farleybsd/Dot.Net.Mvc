@@ -6,3 +6,9 @@ dotnet run
 
 Criando um projeto MVC
 dotnet new mvc
+
+
+Criando um banco 
+
+Visual Studio View -> SqlServer Object Explorer -> DataBase Criar um Novo Banco de Dados -> Add New DataBase->
+Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CasaDoCodigo;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
