@@ -17,7 +17,18 @@ namespace web
         public void ConfigureServices(IServiceCollection services)
         {
             // Injencao de depedencia de uma Interface para uma classe concreta
-            services.AddTransient<ICatalogo,Catalogo>(); // servico temporario
+            //services.AddTransient<ICatalogo,Catalogo>(); // servico temporario
+            // Injencao de depedencia de uma Interface para uma classe concreta
+            // services.AddTransient<IRelatorio,Relatorio>(); // servico temporario
+
+            // Injencao de depedencia de uma Interface para uma classe concreta
+            //services.AddScoped<ICatalogo, Catalogo>(); // evitar que cada requisao gere um novo objeto
+            //services.AddScoped<IRelatorio, Relatorio>();//evitar que cada requisao gere um novo objeto
+
+            // Injencao de depedencia de uma Interface para uma classe concreta
+            var catalogo = new Catalogo();
+            services.AddSingleton<ICatalogo>(catalogo); // instancia unica ao longo de toda aplicacao
+            services.AddSingleton<IRelatorio>(new Relatorio(catalogo));//instancia unica ao longo de toda aplicacao
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,7 +40,7 @@ namespace web
             }
 
             ICatalogo catalogo = serviceProvider.GetService<ICatalogo>();
-            IRelatorio relatorio = new Relatorio(catalogo);
+            IRelatorio relatorio = serviceProvider.GetService<IRelatorio>();
 
             app.Run(async (context) =>
             {
