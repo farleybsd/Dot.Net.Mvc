@@ -28,6 +28,9 @@ namespace CasaDoCodigo
             string connectionString = Configuration.GetConnectionString("Default");
             services.AddDbContext<ApplicationContext>(options => 
             options.UseSqlServer(connectionString));
+
+            // registrando o acesso ao banco
+            services.AddTransient<IDataService, DataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +57,7 @@ namespace CasaDoCodigo
             });
 
             // Execultar o migrate quando rodar o projeto
-            serviceProvider.GetService<ApplicationContext>().Database.Migrate();
+            serviceProvider.GetService<DataService>().InicializaDb();
         }
     }
 }
