@@ -25,8 +25,9 @@ namespace CasaDoCodigo.Repositories
         public void AddItem(string codigo)
         {
             var produto = contexto.Set<Produto>()
-                                  .Where(p => p.Codigo == codigo)
-                                  .SingleOrDefault();
+                           .Where(p => p.Codigo == codigo)
+                           .FirstOrDefault();
+
             if (produto ==null)
             {
                 throw new ArgumentException("Produto Não Encontrado");

@@ -45,7 +45,8 @@ namespace CasaDoCodigo.Controllers
         //http://localhost:56317/pedido/resumo
         public IActionResult Resumo()
         {
-            return View();
+            Pedido pedido = pedidoRepository.GetPedido();
+            return View(pedido);
         }
     }
 }
