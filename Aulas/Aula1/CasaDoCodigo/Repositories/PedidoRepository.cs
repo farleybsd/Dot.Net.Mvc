@@ -1,5 +1,6 @@
 ﻿using CasaDoCodigo.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,41 @@ namespace CasaDoCodigo.Repositories
     public interface IPedidoRepository
     {
         Pedido GetPedido();
+        void AddItem(string codigo);
     }
     public class PedidoRepository : BaseRepository<Pedido>, IPedidoRepository
     {
         private readonly IHttpContextAccessor contextAccessor;
         public PedidoRepository(ApplicationContext contexto,
-                                HttpContextAccessor contextAccessor) : base(contexto)
+                                IHttpContextAccessor contextAccessor) : base(contexto)
         {
             this.contextAccessor = contextAccessor;
+        }
+
+        public void AddItem(string codigo)
+        {
+            var produto = contexto.Set<Produto>()
+                                  .Where(p => p.Codigo == codigo)
+                                  .SingleOrDefault();
+            if (produto ==null)
+            {
+                throw new ArgumentException("Produto Não Encontrado");
+            }
+
+            var pedido = GetPedido();
+
+            var itemPedido = contexto.Set<ItemPedido>()
+                                     .Where(i => i.Produto.Codigo == codigo
+                                            && i.Pedido.Id == pedido.Id)
+                                     .SingleOrDefault();
+
+            if (itemPedido == null)
+            {
+                itemPedido = new ItemPedido(pedido,produto,1,produto.Preco);
+                contexto.Set<ItemPedido>()
+                        .Add(itemPedido);
+                contexto.SaveChanges();
+            }
         }
 
         public Pedido GetPedido()
@@ -32,6 +60,7 @@ namespace CasaDoCodigo.Repositories
                 pedido = new Pedido();
                 dbSets.Add(pedido);
                 contexto.SaveChanges();
+                SetPeidoId(pedido.Id); 
             }
 
             return pedido;

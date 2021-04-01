@@ -27,8 +27,12 @@ namespace CasaDoCodigo.Controllers
         }
 
         //http://localhost:56317/pedido/carrinho
-        public IActionResult Carrinho()
+        public IActionResult Carrinho(string codigo)
         {
+            if (!string.IsNullOrEmpty(codigo))
+            {
+                pedidoRepository.AddItem(codigo);
+            }
             Pedido pedido = pedidoRepository.GetPedido();
             return View(pedido.Itens);
         }
