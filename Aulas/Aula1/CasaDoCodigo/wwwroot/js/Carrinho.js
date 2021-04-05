@@ -33,6 +33,11 @@
             data: JSON.stringify(data)
         });
     }
+
+    UpdateQuantidade(input) {
+        let data = this.GetData(input);
+        this.PostQuantidade(data);
+    }
 }
 
 var carrinho = new Carrinho();
