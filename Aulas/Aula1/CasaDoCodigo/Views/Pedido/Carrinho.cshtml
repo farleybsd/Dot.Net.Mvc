@@ -98,6 +98,19 @@
             var linhaDoItem = $(btn).parents('[item-id]'); // pegando elemento a cima do botao no DOM
             var itemId = $(linhaDoItem).attr('item-id');
             var novaQtd = $(linhaDoItem).find('input').val() // pegando elemento a abaixo do botao no DOM
+
+            var data = {
+                Id: itemId,
+                Quantidade: novaQtd
+            };
+
+            $.ajax({
+                url: '/pedido/UpdateQuantidade',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data)
+            });
+
             debugger;
         }
 
