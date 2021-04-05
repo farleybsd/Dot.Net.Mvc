@@ -95,7 +95,9 @@
 
         function clickIncremento(btn)
         {
-            var itemId = $(btn).attr('item-id');
+            var linhaDoItem = $(btn).parents('[item-id]'); // pegando elemento a cima do botao no DOM
+            var itemId = $(linhaDoItem).attr('item-id');
+            var novaQtd = $(linhaDoItem).find('input').val() // pegando elemento a abaixo do botao no DOM
             debugger;
         }
 
