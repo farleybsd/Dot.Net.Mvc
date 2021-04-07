@@ -57,6 +57,7 @@ namespace CasaDoCodigo.Controllers
         }
         //http://localhost:56317/pedido/resumo
         [HttpPost]
+        [ValidateAntiForgeryToken]//bloqueia postman
         public IActionResult Resumo( Cadastro cadastro)
         {
             if (ModelState.IsValid)
