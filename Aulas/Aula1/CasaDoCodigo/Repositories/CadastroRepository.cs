@@ -18,7 +18,18 @@ namespace CasaDoCodigo.Repositories
 
         public Cadastro Update(int cadastroId, Cadastro novoCadastro)
         {
-            throw new NotImplementedException();
+            var cadastrodb = dbSets.Where(c => c.Id == cadastroId)
+                                    .SingleOrDefault();
+            if (cadastrodb == null)
+            {
+                throw new ExecutionEngineException("Cadastro");
+            }
+
+            cadastrodb.Update(novoCadastro);
+
+            contexto.SaveChanges();
+
+            return cadastrodb;
         }
     }
 }
