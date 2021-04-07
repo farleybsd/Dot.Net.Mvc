@@ -57,7 +57,7 @@ namespace CasaDoCodigo.Controllers
         }
         //http://localhost:56317/pedido/resumo
         [HttpPost]
-        [ValidateAntiForgeryToken]//bloqueia postman
+        [ValidateAntiForgeryToken]//bloqueia postman se nao tiver acesso do Token
         public IActionResult Resumo( Cadastro cadastro)
         {
             if (ModelState.IsValid)
@@ -68,6 +68,7 @@ namespace CasaDoCodigo.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]//bloqueia postman se nao tiver acesso do Token
         public UpdateQuantidadeResponse UpdateQuantidade([FromBody]ItemPedido itemPedido)
         {
           return   pedidoRepository.UpQuantidade(itemPedido);
